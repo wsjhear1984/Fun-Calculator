@@ -11,7 +11,8 @@ const ChristmasScreen: React.FC<ChristmasScreenProps> = ({ onReset }) => {
   useEffect(() => {
     // Generate random falling elements
     const newElements = [];
-    const count = 50; 
+    // Increased count to ensure "many" trees populate the screen
+    const count = 75; 
     
     for (let i = 0; i < count; i++) {
       const delay = Math.random() * 5;
@@ -21,9 +22,16 @@ const ChristmasScreen: React.FC<ChristmasScreenProps> = ({ onReset }) => {
       const type = Math.random();
 
       let icon;
-      if (type < 0.4) icon = <Trees size={size} className="text-green-500" />;
-      else if (type < 0.7) icon = <Snowflake size={size} className="text-blue-200" />;
-      else if (type < 0.9) icon = <Gift size={size} className="text-red-500" />;
+      // Requirement: "many Christmas tree will appear"
+      // Adjusted probabilities to heavily favor trees (70%)
+      if (type < 0.7) {
+        // Add variety to tree shades for a richer forest look
+        const greenShades = ["text-green-500", "text-green-600", "text-emerald-500", "text-teal-600"];
+        const randomShade = greenShades[Math.floor(Math.random() * greenShades.length)];
+        icon = <Trees size={size} className={randomShade} />;
+      }
+      else if (type < 0.85) icon = <Snowflake size={size} className="text-blue-200" />;
+      else if (type < 0.95) icon = <Gift size={size} className="text-red-500" />;
       else icon = <Star size={size} className="text-yellow-400" />;
 
       newElements.push(
