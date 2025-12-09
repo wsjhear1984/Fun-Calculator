@@ -86,11 +86,11 @@ const Calculator: React.FC = () => {
       if (!prev.operator || !prev.previousInput) return prev;
 
       // EASTER EGG CHECK
-      // "when users input 47000/188"
+      // "when users input 2025/1224"
       if (
-        prev.previousInput === '47000' &&
+        prev.previousInput === '2025' &&
         prev.operator === '÷' &&
-        prev.currentInput === '188'
+        prev.currentInput === '1224'
       ) {
         return {
           ...prev,
